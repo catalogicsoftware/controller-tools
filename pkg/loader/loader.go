@@ -278,7 +278,8 @@ func (l *loader) typeCheck(pkg *Package) {
 			errs = append(errs, err)
 		},
 
-		Sizes: pkg.TypesSizes,
+		// KUBEDR-5384: This is causing a panic with Go 1.22, use the default instead
+		//Sizes: pkg.TypesSizes,
 	}
 	if err := types.NewChecker(checkConfig, l.cfg.Fset, pkg.Types, pkg.TypesInfo).Files(pkg.Syntax); err != nil {
 		errs = append(errs, err)
